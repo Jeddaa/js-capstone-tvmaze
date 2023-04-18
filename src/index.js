@@ -1,5 +1,5 @@
 import './index.css';
-import comments from './comments.js';
+// import comments from './comments.js';
 const id = 'UCdL9KYsi0SBeKyTsp1q';
 
 // import c from './renderComments.js';
@@ -7,5 +7,5 @@ const id = 'UCdL9KYsi0SBeKyTsp1q';
 
 // const allComments = [];
 
-comments();
+// comments();
 // renderComments(allComments);
