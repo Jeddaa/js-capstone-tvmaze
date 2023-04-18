@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  padding: 0 75px;
+  padding: 0 75px 75px 75px;
 }
 
 a {
@@ -54,6 +54,14 @@ ul li:active {
   margin: 25px;
 }
 
+.w-65 {
+  width: 70%;
+}
+
+.w-35 {
+  width: 30%;
+}
+
 .col-sm-4 img {
   width: 100%;
 }
@@ -91,7 +99,8 @@ button {
 }
 
 footer {
-  position: absolute;
+  position: fixed;
+  background-color: #fff;
   right: 0;
   left: 0;
   bottom: 0;
