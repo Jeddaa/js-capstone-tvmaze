@@ -39,3 +39,13 @@ ul li:active {
 .align-center {
   align-items: center;
 }
+
+footer {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  letter-spacing: 0.5px;
+  padding: 0 35px;
+  border: 2px solid #000;
+}
