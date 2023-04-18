@@ -1,10 +1,12 @@
-import requestItems from './request.js';
+import { requestItems, involvementApi } from './request.js';
 
-const showItems = (showAllItem, baseURL) => {
+const showItems = async (showAllItem, baseURL, involvementURL) => {
   showAllItem.innerHTML = '';
 
   for (let index = 1; index < 20; index += 1) {
-    requestItems(`${baseURL}${index}`).then((res) => {
+    try {
+      const res = await requestItems(`${baseURL}${index}`);
+      const like = await involvementApi(involvementURL);
       showAllItem.innerHTML += `
         <section class="col-sm-4">
           <aside>
@@ -15,7 +17,7 @@ const showItems = (showAllItem, baseURL) => {
               <div class="fw-700 w-65">${res.name}</div>
               <div class="text-right w-35">
                 <i class="fa-solid fa-thumbs-up"></i>
-                <div class="fs-5 fw-700">5 likes</div>
+                <div class="fs-5 fw-700">${like.likes} likes</div>
               </div>
             </div>
           </aside>
@@ -25,7 +27,9 @@ const showItems = (showAllItem, baseURL) => {
           </aside>
         </section>
     `;
-    });
+    } catch (error) {
+      showAllItem.innerHTML += error;
+    }
   }
 };
 
