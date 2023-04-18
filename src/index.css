@@ -40,6 +40,56 @@ ul li:active {
   align-items: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 50px;
+}
+
+.col-sm-4 {
+  margin: 25px;
+}
+
+.col-sm-4 img {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fw-700 {
+  font-weight: 600;
+}
+
+.fs-6 {
+  font-size: 10px;
+}
+
+.fs-5 {
+  font-size: 13px;
+}
+
+button {
+  background-color: #fff;
+  cursor: pointer;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.btn {
+  font-size: 16px;
+  padding: 4px 15px;
+}
+
 footer {
   position: absolute;
   right: 0;
