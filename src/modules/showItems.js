@@ -1,10 +1,13 @@
 import requestItems from './request.js';
+// import addPopUp from './addPopUp.js';
+import addPopUp from './testPopUp.js';
 
-const showItems = (showAllItem, baseURL) => {
+const showItems = async (showAllItem, baseURL) => {
   showAllItem.innerHTML = '';
 
   for (let index = 1; index < 12; index += 1) {
-    requestItems(`${baseURL}${index}`).then((res) => {
+    /* eslint-disable no-await-in-loop */
+    await requestItems(`${baseURL}${index}`).then((res) => {
       showAllItem.innerHTML += `
     <section class="col-sm-4">
           <aside>
@@ -20,13 +23,15 @@ const showItems = (showAllItem, baseURL) => {
             </div>
           </aside>
           <aside class="text-center">
-            <button class="btn">Comments</button>
-            <button class="btn">Reservations</button>
+            <button class="btn" data-set=${res.id} >Comments</button>
+            <button class="btn2">Reservations</button>
           </aside>
         </section>
     `;
     });
   }
+  const btn = document.querySelectorAll('.btn');
+  addPopUp(btn, baseURL);
 };
 
 export default showItems;
