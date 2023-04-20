@@ -1,15 +1,19 @@
 import { requestItems } from './request.js';
 import addPopUp from './addPopUp.js';
-import postLike from './postLike.js';
+import { postLike, showLike } from './postLike.js';
+import countArr from './counter.js';
 
-const showItems = async (showAllItem, baseURL, involvementURL) => {
+const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
   showAllItem.innerHTML = '';
 
   try {
+    const storeObj = [];
     for (let index = 1; index < 13; index += 1) {
       /* eslint-disable no-await-in-loop */
       const res = await requestItems(`${baseURL}${index}`);
-      const like = await requestItems(involvementURL);
+
+      storeObj.push(res);
+      countArr(storeObj, showCount);
       showAllItem.innerHTML += `
         <section class="col-sm-4">
           <aside>
@@ -20,7 +24,7 @@ const showItems = async (showAllItem, baseURL, involvementURL) => {
               <div class="fw-700 w-65">${res.name}</div>
               <div class="text-right w-35">
                 <i class="fa-solid fa-thumbs-up like" data-set=${res.id}></i>
-                <div class="fs-5 fw-700">${like[index - 1].likes}</div>
+                <div class="fs-5 fw-700 showLike" data-set=${index}></div>
               </div>
             </div>
           </aside>
@@ -35,7 +39,9 @@ const showItems = async (showAllItem, baseURL, involvementURL) => {
     showAllItem.innerHTML += error;
   }
   const thumbsUp = document.querySelectorAll('.like');
-  postLike(thumbsUp, involvementURL);
+  const showLikes = document.querySelectorAll('.showLike');
+  postLike(thumbsUp, involvementURL, showLikes);
+  showLike(showLikes, involvementURL);
   const btn = document.querySelectorAll('.btn');
   addPopUp(btn, baseURL);
 };
