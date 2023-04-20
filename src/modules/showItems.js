@@ -1,14 +1,18 @@
 import { requestItems } from './request.js';
 import postLike from './postLike.js';
+import countArr from './counter.js';
 
-const showItems = async (showAllItem, baseURL, involvementURL) => {
+const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
   showAllItem.innerHTML = '';
 
   try {
+    const storeObj = [];
     for (let index = 1; index < 13; index += 1) {
       /* eslint-disable no-await-in-loop */
       const res = await requestItems(`${baseURL}${index}`);
       const like = await requestItems(involvementURL);
+      storeObj.push(res);
+      countArr(storeObj, showCount);
       showAllItem.innerHTML += `
         <section class="col-sm-4">
           <aside>
