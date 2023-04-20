@@ -18,3 +18,5 @@ export const postLike = (thumbsUp, involvementURL, showLikes) => {
     });
   });
 };
+
+export default postLike;

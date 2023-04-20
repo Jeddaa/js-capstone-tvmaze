@@ -1,4 +1,5 @@
 import { requestItems } from './request.js';
+import addPopUp from './addPopUp.js';
 import { postLike, showLike } from './postLike.js';
 import countArr from './counter.js';
 
@@ -28,8 +29,8 @@ const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
             </div>
           </aside>
           <aside class="text-center">
-            <button class="btn comment">Comments</button>
-            <button class="btn">Reservations</button>
+            <button class="btn comment" data-set=${res.id} >Comments</button>
+            <button class="btn2">Reservations</button>
           </aside>
         </section>
     `;
@@ -41,6 +42,8 @@ const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
   const showLikes = document.querySelectorAll('.showLike');
   postLike(thumbsUp, involvementURL, showLikes);
   showLike(showLikes, involvementURL);
+  const btn = document.querySelectorAll('.btn');
+  addPopUp(btn, baseURL);
 };
 
 export default showItems;
