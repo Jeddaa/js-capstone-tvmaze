@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { requestItems, involvementApi } from './request.js';
 
 const showItems = async (showAllItem, baseURL, involvementURL) => {
