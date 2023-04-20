@@ -4,6 +4,7 @@ body {
   padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
+  /* overflow: auto; */
 }
 
 .container {
@@ -124,34 +125,122 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 60vw;
   max-width: 95vw;
   height: auto;
-  max-height: 90vh;
+  max-height: 100vh;
   font-family: Poppins, sans-serif;
   z-index: 1000;
   border: 1px solid #dfe1e6;
   border-radius: 10px;
-  padding: 10px;
+  padding: 2em;
+  overflow: auto;
 }
 
-.d-none {
-  display: none;
+.api-data-h2 {
+  text-align: center;
 }
 
-.d-block {
-  display: block;
+.api-data {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* flex-direction: column; */
+  list-style: none;
+  gap: 10px;
+  padding: 0;
 }
 
-.list {
+.api-data > li {
+  margin: 0;
+}
+
+.api-data-summary {
   display: flex;
+  flex-direction: column;
+  /* padding: 0 2em 0; */
+  gap: 10px;
+  /* text-justify: auto; */
+  text-align: justify;
+}
+
+.api-data-summary > h3 {
+  margin: 0;
+  text-align: center;
+}
+
+.api-data-summary > p {
+  margin: 0;
+  /* display: flex; */
+  line-height: 20px;
+}
+
+.comment-header {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+.api-comments-div {
+  padding: 0;
+  display: flex;
+  margin: 0;
+}
+
+.api-comments-div > li {
+  padding: 0;
+  margin: 0.3em;
 }
 
 .close-popup {
-  display: flex;
+  display: block;
   cursor: pointer;
-  /* font-size: 700px; */
+  font-size: 20px;
+  padding-top: 1em;
+}
+
+.api-data-img {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .comment-btn {
   cursor: pointer;
+  width: 20%;
+  font-size: 1em;
+  text-align: start;
+  padding: 5px 2px;
+}
+
+.form-header {
+  text-align: center;
+}
+
+.add-comment-form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+
+.yourName {
+  width: 35%;
+  margin-bottom: 1em;
+  border: #000 2px solid;
+  padding: 5px 2px;
+}
+
+.yourName::placeholder {
+  font-size: 1.2em;
+}
+
+.yourComment {
+  width: 55%;
+  border: #000 2px solid;
+  height: 100px;
+  vertical-align: top;
+  text-align: top;
+}
+
+.yourComment::placeholder {
+  transform: translateY(-200%);
+  font-size: 1.2em;
 }
