@@ -1,21 +1,24 @@
-import requestItems from './request.js';
+/* eslint-disable no-await-in-loop */
+import { requestItems, involvementApi } from './request.js';
 
-const showItems = (showAllItem, baseURL) => {
+const showItems = async (showAllItem, baseURL, involvementURL) => {
   showAllItem.innerHTML = '';
 
-  for (let index = 1; index < 12; index += 1) {
-    requestItems(`${baseURL}${index}`).then((res) => {
+  for (let index = 1; index < 20; index += 1) {
+    try {
+      const res = await requestItems(`${baseURL}${index}`);
+      const like = await involvementApi(involvementURL);
       showAllItem.innerHTML += `
-    <section class="col-sm-4">
+        <section class="col-sm-4">
           <aside>
             <img
               src="${res.image.medium}"
               alt="list of movies image">
             <div class="d-flex justify-between">
-              <div class="fw-700">${res.name}</div>
-              <div class="text-right">
+              <div class="fw-700 w-65">${res.name}</div>
+              <div class="text-right w-35">
                 <i class="fa-solid fa-thumbs-up"></i>
-                <div class="fs-5 fw-700">5 likes</div>
+                <div class="fs-5 fw-700">${like.likes} likes</div>
               </div>
             </div>
           </aside>
@@ -25,7 +28,9 @@ const showItems = (showAllItem, baseURL) => {
           </aside>
         </section>
     `;
-    });
+    } catch (error) {
+      showAllItem.innerHTML += error;
+    }
   }
 };
 

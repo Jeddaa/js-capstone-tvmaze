@@ -4,4 +4,10 @@ const requestItems = async (baseURL) => {
   return tvData;
 };
 
-export default requestItems;
+const involvementApi = async (baseURL) => {
+  const response = await fetch(baseURL);
+  const likes = await response.json();
+  return likes;
+};
+
+module.exports = { requestItems, involvementApi };
