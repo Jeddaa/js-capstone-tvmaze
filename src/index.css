@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  padding: 0 75px 75px 75px;
+  padding: 0 75px 185px 75px;
 }
 
 a {
@@ -84,6 +84,15 @@ ul li:active {
 
 .fs-5 {
   font-size: 13px;
+}
+
+.fa-thumbs-up {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.fa-thumbs-up:hover {
+  color: rgba(32, 32, 250, 0.687);
 }
 
 button {
