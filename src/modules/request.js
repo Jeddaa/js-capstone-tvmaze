@@ -4,10 +4,8 @@ const requestItems = async (baseURL) => {
   return tvData;
 };
 
-const involvementApi = async (baseURL) => {
-  const response = await fetch(baseURL);
-  const likes = await response.json();
-  return likes;
+const involvementApi = async (baseURL, data) => {
+  await fetch(baseURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 };
 
 module.exports = { requestItems, involvementApi };

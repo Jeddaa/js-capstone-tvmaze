@@ -1,25 +1,19 @@
-/* eslint-disable consistent-return */
-import requestItems from './request.js';
+import commentCount from './commentCount.js';
+import { requestItems, involvementApi } from './request.js';
 
 const content = document.querySelector('.popup-content');
 const showComments = document.querySelector('.popup-comments');
-const formBtn = document.querySelector('.comment-btn');
+const form = document.querySelector('.add-comment-form');
 const popup = document.querySelector('.popup-div');
 const close = document.querySelector('.close-popup');
 const commentHeader = document.querySelector('.comment-header');
 const cmtURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
-// const appId = 'UCdL9KYsi0SBeKyTsp1q';
-const appId = '7xp0YiVh0xhLSIwUJh90';
+const appId = 'WXD5VCEItQhvz4b5mgk3';
 
-function refreshComments(appId, resId, cmtURL) {
-  requestItems(`${cmtURL}apps/${appId}/comments?item_id=${resId}`).then((response) => {
+const refreshComments = async (appId, resId, cmtURL) => {
+  await requestItems(`${cmtURL}apps/${appId}/comments?item_id=${resId}`).then((response) => {
     commentHeader.innerHTML = '';
-    const counta = response.length;
-    if (typeof counta === 'undefined') {
-      commentHeader.innerHTML = 'Comments (0)';
-    } else if (typeof counta === 'number' && Number.isInteger(counta)) {
-      commentHeader.innerHTML = `Comments (${counta})`;
-    }
+    commentCount(response, commentHeader);
     showComments.innerHTML = '';
     response.forEach((res) => {
       showComments.innerHTML += `
@@ -31,41 +25,24 @@ function refreshComments(appId, resId, cmtURL) {
     `;
     });
   });
-}
+};
 
-async function addComments(cmtURL, appId, resId) {
+const addComments = async (cmtURL, appId, resId) => {
   const name = document.querySelector('.yourName');
   const comt = document.querySelector('.yourComment');
   if (name.value !== '' && comt.value !== '') {
-    console.log(comt.value);
-    await fetch(`${cmtURL}apps/${appId}/comments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        item_id: resId,
-        username: name.value,
-        comment: comt.value,
-      }),
-    }).then(() => {
-      refreshComments(appId, resId, cmtURL);
-      // console.log(response);
-      name.value = '';
-      comt.value = '';
+    await involvementApi(`${cmtURL}apps/${appId}/comments`, {
+      item_id: resId,
+      username: name.value,
+      comment: comt.value,
     });
+    await refreshComments(appId, resId, cmtURL);
   }
-}
-function fetchComments(appId, resId, cmtURL) {
+};
+const fetchComments = (appId, resId, cmtURL) => {
   requestItems(`${cmtURL}apps/${appId}/comments?item_id=${resId}`).then((response) => {
     commentHeader.innerHTML = '';
-    const counta = response.length;
-    if (typeof counta === 'undefined') {
-      commentHeader.innerHTML = 'Comments (0)';
-    } else if (typeof counta === 'number' && Number.isInteger(counta)) {
-      commentHeader.innerHTML = `Comments (${counta})`;
-    }
-    // requestItems(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7xp0YiVh0xhLSIwUJh90/comments?item_id=${resId}`).then((response) => {
+    commentCount(response, commentHeader);
     response.forEach((res) => {
       showComments.innerHTML += `
     <ul class="api-comments-div">
@@ -76,10 +53,10 @@ function fetchComments(appId, resId, cmtURL) {
     `;
     });
   });
-}
+};
 
-function fetchAPIData(resId, baseURL) {
-  requestItems(`${baseURL}${resId}`).then((res) => {
+const fetchAPIData = async (resId, baseURL) => {
+  await requestItems(`${baseURL}${resId}`).then((res) => {
     content.innerHTML = `
     <div class="api-data-img">
       <img
@@ -101,9 +78,7 @@ function fetchAPIData(resId, baseURL) {
       </div>
       `;
   });
-}
-// class="api-data-summary-header"
-// <p class="api-data-summary"> Summary: ${res.summary}</p>;
+};
 
 const addPopUp = (btn, baseURL) => {
   btn.forEach((testbtn) => {
@@ -113,14 +88,11 @@ const addPopUp = (btn, baseURL) => {
       popup.style.display = 'block';
       fetchAPIData(resId, baseURL);
       fetchComments(appId, resId, cmtURL);
-      formBtn.addEventListener('click', async (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        addComments(cmtURL, appId, resId);
-        // refreshComments(appId, resId, cmtURL);
+        await addComments(cmtURL, appId, resId);
+        form.reset();
       });
-      // fetchComments(appId, resId, cmtURL);
-      refreshComments(appId, resId, cmtURL);
-      // console.log(appId);
     });
   });
 };
