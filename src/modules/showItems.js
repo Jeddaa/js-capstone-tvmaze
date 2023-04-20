@@ -1,5 +1,5 @@
 import { requestItems } from './request.js';
-import postLike from './postLike.js';
+import { postLike, showLike } from './postLike.js';
 import countArr from './counter.js';
 
 const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
@@ -10,7 +10,7 @@ const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
     for (let index = 1; index < 13; index += 1) {
       /* eslint-disable no-await-in-loop */
       const res = await requestItems(`${baseURL}${index}`);
-      const like = await requestItems(involvementURL);
+
       storeObj.push(res);
       countArr(storeObj, showCount);
       showAllItem.innerHTML += `
@@ -23,7 +23,7 @@ const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
               <div class="fw-700 w-65">${res.name}</div>
               <div class="text-right w-35">
                 <i class="fa-solid fa-thumbs-up like" data-set=${res.id}></i>
-                <div class="fs-5 fw-700">${like[index - 1].likes}</div>
+                <div class="fs-5 fw-700 showLike" data-set=${index}></div>
               </div>
             </div>
           </aside>
@@ -38,7 +38,9 @@ const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
     showAllItem.innerHTML += error;
   }
   const thumbsUp = document.querySelectorAll('.like');
-  postLike(thumbsUp, involvementURL);
+  const showLikes = document.querySelectorAll('.showLike');
+  postLike(thumbsUp, involvementURL, showLikes);
+  showLike(showLikes, involvementURL);
 };
 
 export default showItems;

@@ -5,9 +5,7 @@ const requestItems = async (baseURL) => {
 };
 
 const involvementApi = async (baseURL, data) => {
-  const response = await fetch(baseURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ item_id: data }) });
-  const likes = await response.json();
-  return likes;
+  await fetch(baseURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
 };
 
 module.exports = { requestItems, involvementApi };
