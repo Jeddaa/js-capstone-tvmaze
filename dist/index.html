@@ -33,16 +33,22 @@
     <section class="popup-div">
       <i id="close-popup" class="fa fa-times close-popup" aria-hidden="true"></i>
       <div class="popup-content"></div>
+      <h3 class="comment-header">Comments</h3>
       <div class="popup-comments"></div>
       <div class="popup-form">
-        <form action="">
+        <form class="add-comment-form" action="">
+          <h3 class="form-header">Add a comment</h3>
           <input type="text" name="name" class="yourName" placeholder="Your name" />
-          <input type="text" name="name" class="yourComment" placeholder="Your insights" />
+          <input type="text" name="name" class="yourComment" placeholder="Your insights" onfocus="this.setSelectionRange(0,0)" />
           <div class="comment-div">
             <button type="submit" class="comment-btn">Comment</button>
           </div>
         </form>
       </div>
     </section>
+
+    <footer>
+      <p>Created by Microverse under CC license</p>
+    </footer>
   </body>
 </html>
