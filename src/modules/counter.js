@@ -2,4 +2,4 @@ const countArr = (getArr, showCount) => {
   showCount.innerHTML = getArr.length;
 };
 
-export default countArr;
+module.exports = countArr;
