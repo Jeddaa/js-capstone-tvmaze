@@ -9,7 +9,6 @@ const popup = document.querySelector('.popup-div');
 const close = document.querySelector('.close-popup');
 const commentHeader = document.querySelector('.comment-header');
 const cmtURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
-// const appId = 'WXD5VCEItQhvz4b5mgk3';
 const appId = 'UCdL9KYsi0SBeKyTsp1q';
 
 const refreshComments = async (appId, resId, cmtURL) => {
@@ -20,7 +19,6 @@ const refreshComments = async (appId, resId, cmtURL) => {
     commentCount(response, commentHeader);
     try {
       response.forEach((res) => {
-        // console.log(resId);
         showComments.innerHTML += `
     <ul class="api-comments-div">
         <li>${res.creation_date}</li>
