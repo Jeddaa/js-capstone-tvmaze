@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import commentCount from './commentCount.js';
 import { requestItems, involvementApi } from './request.js';
 
@@ -8,22 +9,54 @@ const popup = document.querySelector('.popup-div');
 const close = document.querySelector('.close-popup');
 const commentHeader = document.querySelector('.comment-header');
 const cmtURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
-const appId = 'WXD5VCEItQhvz4b5mgk3';
+// const appId = 'WXD5VCEItQhvz4b5mgk3';
+const appId = 'UCdL9KYsi0SBeKyTsp1q';
 
 const refreshComments = async (appId, resId, cmtURL) => {
+  showComments.innerHTML = '';
+  // eslint-disable-next-line consistent-return
   await requestItems(`${cmtURL}apps/${appId}/comments?item_id=${resId}`).then((response) => {
     commentHeader.innerHTML = '';
     commentCount(response, commentHeader);
-    showComments.innerHTML = '';
-    response.forEach((res) => {
-      showComments.innerHTML += `
+    try {
+      response.forEach((res) => {
+        // console.log(resId);
+        showComments.innerHTML += `
     <ul class="api-comments-div">
         <li>${res.creation_date}</li>
         <li>${res.username}:</li>
         <li>${res.comment}</li>
       </ul>
     `;
-    });
+      });
+    } catch (err) {
+      // console.log('refresh');
+      return null;
+    }
+  });
+};
+
+const fetchComments = async (appId, resId, cmtURL) => {
+  showComments.innerHTML = '';
+  // eslint-disable-next-line consistent-return
+  await requestItems(`${cmtURL}apps/${appId}/comments?item_id=${resId}`).then((response) => {
+    commentHeader.innerHTML = '';
+    commentCount(response, commentHeader);
+    try {
+      response.forEach((res) => {
+        console.log(res);
+        showComments.innerHTML += `
+    <ul class="api-comments-div">
+        <li>${res.creation_date}</li>
+        <li>${res.username}:</li>
+        <li>${res.comment}</li>
+      </ul>
+    `;
+      });
+    } catch (err) {
+      console.log('trial');
+      return null;
+    }
   });
 };
 
@@ -36,26 +69,12 @@ const addComments = async (cmtURL, appId, resId) => {
       username: name.value,
       comment: comt.value,
     });
-    await refreshComments(appId, resId, cmtURL);
+    await fetchComments(appId, resId, cmtURL);
   }
-};
-const fetchComments = (appId, resId, cmtURL) => {
-  requestItems(`${cmtURL}apps/${appId}/comments?item_id=${resId}`).then((response) => {
-    commentHeader.innerHTML = '';
-    commentCount(response, commentHeader);
-    response.forEach((res) => {
-      showComments.innerHTML += `
-    <ul class="api-comments-div">
-        <li>${res.creation_date}</li>
-        <li>${res.username}:</li>
-        <li>${res.comment}</li>
-      </ul>
-    `;
-    });
-  });
 };
 
 const fetchAPIData = async (resId, baseURL) => {
+  // const resId = resId.toString();
   await requestItems(`${baseURL}${resId}`).then((res) => {
     content.innerHTML = `
     <div class="api-data-img">
@@ -82,25 +101,33 @@ const fetchAPIData = async (resId, baseURL) => {
 
 const addPopUp = (btn, baseURL) => {
   btn.forEach((testbtn) => {
-    testbtn.addEventListener('click', () => {
+    testbtn.addEventListener('click', async () => {
       document.body.style.overflow = 'hidden';
       const resId = testbtn.getAttribute('data-set');
       popup.style.display = 'block';
       fetchAPIData(resId, baseURL);
-      fetchComments(appId, resId, cmtURL);
+      await fetchComments(appId, resId, cmtURL);
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         await addComments(cmtURL, appId, resId);
+        // // await refreshComments(appId, resId, cmtURL);
+        // await fetchComments(appId, resId, cmtURL);
         form.reset();
+      });
+      close.addEventListener('click', () => {
+        popup.style.display = 'none';
+        showComments.innerHTML = '';
+        document.body.style.overflow = '';
+        commentHeader.innerHTML = '';
       });
     });
   });
 };
 
-close.addEventListener('click', () => {
-  popup.style.display = 'none';
-  showComments.innerHTML = '';
-  document.body.style.overflow = '';
-  commentHeader.innerHTML = '';
-});
+// close.addEventListener('click', () => {
+//   popup.style.display = 'none';
+//   showComments.innerHTML = '';
+//   document.body.style.overflow = '';
+//   commentHeader.innerHTML = '';
+// });
 export default addPopUp;
