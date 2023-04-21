@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "dev": "webpack --mode development",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
