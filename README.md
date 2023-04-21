@@ -73,6 +73,16 @@ This is Javascript Capstone Project that is based on an external API called TV m
   </ul>
 </details>
 
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo
+
+[Metro Art](https://jeddaa.github.io/js-capstone-tvmaze/dist/)
+
+## Video Presentation <a name="video-presentation"></a>
+
+Click on this [Video Link](https://drive.google.com/file/d/1JMNGYTR3ChIDvVxWGnKnmlZPrU2uUFVc/view?usp=share_link) to view the video walkthrough of this project
+
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
