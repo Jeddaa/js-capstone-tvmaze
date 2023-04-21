@@ -30,7 +30,6 @@ const refreshComments = async (appId, resId, cmtURL) => {
     `;
       });
     } catch (err) {
-      // console.log('refresh');
       return null;
     }
   });
@@ -44,7 +43,6 @@ const fetchComments = async (appId, resId, cmtURL) => {
     commentCount(response, commentHeader);
     try {
       response.forEach((res) => {
-        console.log(res);
         showComments.innerHTML += `
     <ul class="api-comments-div">
         <li>${res.creation_date}</li>
@@ -54,7 +52,6 @@ const fetchComments = async (appId, resId, cmtURL) => {
     `;
       });
     } catch (err) {
-      console.log('trial');
       return null;
     }
   });
@@ -74,7 +71,6 @@ const addComments = async (cmtURL, appId, resId) => {
 };
 
 const fetchAPIData = async (resId, baseURL) => {
-  // const resId = resId.toString();
   await requestItems(`${baseURL}${resId}`).then((res) => {
     content.innerHTML = `
     <div class="api-data-img">
@@ -105,13 +101,11 @@ const addPopUp = (btn, baseURL) => {
       document.body.style.overflow = 'hidden';
       const resId = testbtn.getAttribute('data-set');
       popup.style.display = 'block';
-      fetchAPIData(resId, baseURL);
+      await fetchAPIData(resId, baseURL);
       await fetchComments(appId, resId, cmtURL);
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         await addComments(cmtURL, appId, resId);
-        // // await refreshComments(appId, resId, cmtURL);
-        // await fetchComments(appId, resId, cmtURL);
         form.reset();
       });
       close.addEventListener('click', () => {
@@ -119,15 +113,12 @@ const addPopUp = (btn, baseURL) => {
         showComments.innerHTML = '';
         document.body.style.overflow = '';
         commentHeader.innerHTML = '';
+        setTimeout(() => {
+          document.location.reload();
+        }, 10);
       });
     });
   });
 };
 
-// close.addEventListener('click', () => {
-//   popup.style.display = 'none';
-//   showComments.innerHTML = '';
-//   document.body.style.overflow = '';
-//   commentHeader.innerHTML = '';
-// });
 export default addPopUp;
