@@ -1,4 +1,4 @@
-export default (response, renderHtml) => {
+const commentCount = (response, renderHtml) => {
   const counta = response.length;
   if (typeof counta === 'undefined') {
     renderHtml.innerHTML = 'Comments (0)';
@@ -6,3 +6,5 @@ export default (response, renderHtml) => {
     renderHtml.innerHTML = `Comments (${counta})`;
   }
 };
+
+module.exports = commentCount;
