@@ -1,0 +1,258 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  padding: 0 75px 185px 75px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul li {
+  list-style-type: none;
+  margin: 0 15px;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+}
+
+.api-data > li {
+  margin: 0;
+}
+
+.api-comments-div > li {
+  padding: 0;
+  margin: 0.3em;
+}
+
+ul li:active {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.nav {
+  display: flex;
+  margin: 28px 0;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 50px;
+}
+
+.col-sm-4 {
+  margin: 25px;
+}
+
+.w-65 {
+  width: 70%;
+}
+
+.w-35 {
+  width: 30%;
+}
+
+.col-sm-4 img {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fw-700 {
+  font-weight: 600;
+}
+
+.fs-6 {
+  font-size: 10px;
+}
+
+.fs-5 {
+  font-size: 13px;
+}
+
+.fa-thumbs-up {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.fa-thumbs-up:hover {
+  color: rgba(32, 32, 250, 0.687);
+}
+
+button {
+  background-color: #fff;
+  cursor: pointer;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.btn {
+  font-size: 16px;
+  padding: 4px 15px;
+}
+
+footer {
+  position: fixed;
+  background-color: #fff;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  letter-spacing: 0.5px;
+  padding: 0 35px;
+  border: 2px solid #000;
+}
+
+.test-popup {
+  background: #c1c7d0;
+  opacity: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  backdrop-filter: blur(20px);
+}
+
+.popup-div {
+  display: none;
+  flex-direction: column;
+  align-content: center;
+  position: fixed;
+  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  max-width: 95vw;
+  height: auto;
+  max-height: 100vh;
+  font-family: Poppins, sans-serif;
+  z-index: 1000;
+  border: 1px solid #dfe1e6;
+  border-radius: 10px;
+  padding: 2em;
+  overflow: auto;
+}
+
+.api-data-h2 {
+  text-align: center;
+}
+
+.api-data {
+  display: grid;
+  grid-template-columns: auto auto;
+  list-style: none;
+  gap: 10px;
+  padding: 0;
+}
+
+.api-data-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: justify;
+}
+
+.api-data-summary > h3 {
+  margin: 0;
+  text-align: center;
+}
+
+.api-data-summary > p {
+  margin: 0;
+  line-height: 20px;
+}
+
+.comment-header {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+.api-comments-div {
+  padding: 0;
+  display: flex;
+  margin: 0;
+}
+
+.close-popup {
+  display: block;
+  cursor: pointer;
+  font-size: 20px;
+  padding-top: 1em;
+}
+
+.api-data-img {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.comment-btn {
+  cursor: pointer;
+  width: 20%;
+  font-size: 1em;
+  text-align: start;
+  padding: 5px 2px;
+}
+
+.form-header {
+  text-align: center;
+}
+
+.add-comment-form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+
+.yourName {
+  width: 35%;
+  margin-bottom: 1em;
+  border: #000 2px solid;
+  padding: 5px 2px;
+}
+
+.yourName::placeholder {
+  font-size: 1.2em;
+}
+
+.yourComment {
+  width: 55%;
+  border: #000 2px solid;
+  height: 100px;
+  vertical-align: top;
+}
+
+.yourComment::placeholder {
+  transform: translateY(-200%);
+  font-size: 1.2em;
+}
