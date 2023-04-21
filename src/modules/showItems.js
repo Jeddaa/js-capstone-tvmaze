@@ -43,7 +43,7 @@ const showItems = async (showAllItem, baseURL, involvementURL, showCount) => {
   postLike(thumbsUp, involvementURL, showLikes);
   showLike(showLikes, involvementURL);
   const btn = document.querySelectorAll('.btn');
-  addPopUp(btn, baseURL);
+  await addPopUp(btn, baseURL);
 };
 
 export default showItems;
